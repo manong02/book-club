@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* GLOBAL RESET */
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* THIS prevents scrollbars */
+}
+
+/* Optional: background + text defaults */
+body {
+  background-color: #fdf2f2; /* Soft pink/white */
+  color: #2c2c2c; /* ink color */
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+.pinkbg {
+  background-color: #e6ced2;
+}
