@@ -12,39 +12,11 @@ interface AppContextType {
   markBookAsRead: (bookId: number) => void;
   addBook: (book: Omit<Book, 'id' | 'isCurrent' | 'status' | 'addedAt'>) => void;
   updateBook: (bookId: number, updates: Partial<Book>) => Promise<void>;
+  deleteBook: (bookId: number) => Promise<void>;
   completeBookMeeting: (bookId: number) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
-
-//todo: remove hardcoded books
-const initialBooks: Book[] = [
-  {
-    id: 1,
-    title: "The Midnight Library",
-    author: "Matt Haig",
-    isCurrent: false,
-    status: 'read',
-    addedAt: new Date('2023-01-01').toISOString()
-  },
-  {
-    id: 2,
-    title: "Project Hail Mary",
-    author: "Andy Weir",
-    isCurrent: false,
-    status: 'read',
-    addedAt: new Date('2023-02-01').toISOString()
-  },
-  {
-    id: 3,
-    title: "The House in the Cerulean Sea",
-    author: "TJ Klune",
-    isCurrent: false,
-    status: 'read',
-    coverImage: "https://images-na.ssl-images-amazon.com/images/I/71Xw6KZ2BRL._AC_UL600_SR600,400_.jpg",
-    addedAt: new Date('2023-03-01').toISOString()
-  },
-];
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [currentUser, setCurrentUser] = useState<User | null>(() => {
@@ -154,6 +126,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setBooks(updatedBooks);
   };
 
+  const deleteBook = async (bookId: number) => {
+    const updatedBooks = books.filter(book => book.id !== bookId);
+    setBooks(updatedBooks);
+    localStorage.setItem('bookClubBooks', JSON.stringify(updatedBooks));
+  };
+
   const completeBookMeeting = (bookId: number) => {
     const updatedBooks = books.map(book => {
       if (book.id === bookId) {
@@ -207,6 +185,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         markBookAsRead,
         addBook,
         updateBook,
+        deleteBook,
         completeBookMeeting
       }}
     >

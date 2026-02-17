@@ -66,15 +66,19 @@ export default function AddBook() {
       </div>
       <div className="max-w-2xl mx-auto h-[90%] bg-white rounded-lg shadow-md p-6 flex flex-col">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-pink-800">Add a New Book</h1>
-          <p className="text-gray-600 mt-1">Add a new book to your reading list</p>
+       <h1 className="text-2xl font-bold text-pink-800">
+          Add a New Book 📖
+        </h1>
+        <p className="text-gray-600 mt-1">
+          Tell us what you’re reading next
+        </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4 flex-1 flex flex-col">
           <div className="space-y-4 flex-1">
           <div>
             <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
-              Book Title <span className="text-red-500">*</span>
+              Book Title <span className="text-pink-500">*</span>
             </label>
             <input
               type="text"
@@ -89,7 +93,7 @@ export default function AddBook() {
 
           <div>
             <label htmlFor="author" className="block text-sm font-medium text-gray-700 mb-1">
-              Author <span className="text-red-500">*</span>
+              Author’s Name <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -104,7 +108,7 @@ export default function AddBook() {
 
           <div>
             <label htmlFor="genre" className="block text-sm font-medium text-gray-700 mb-1">
-              Genre <span className="text-red-500">*</span>
+              Genre / Category <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -119,7 +123,7 @@ export default function AddBook() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Upload Cover Image
+              Upload a Cover Image (optional)
             </label>
             <div className="flex items-center space-x-4">
               <label className="cursor-pointer bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400">
@@ -142,7 +146,7 @@ export default function AddBook() {
               )}
             </div>
             <p className="mt-1 text-xs text-gray-500">
-              {imagePreview ? 'Image selected' : 'No file chosen'}
+              {imagePreview ? 'Image selected' : 'Add a cover to make it feel official ✨'}
             </p>
           </div>
 
@@ -155,7 +159,7 @@ export default function AddBook() {
               disabled={isSubmitting}
               className="w-full bg-pink-400 hover:bg-pink-500 text-white font-medium py-2 px-4 rounded transition-colors duration-200 mt-2 disabled:opacity-70 flex items-center justify-center"
             >
-              {isSubmitting ? 'Adding Book...' : 'Add Book'}
+              {isSubmitting ? 'Adding to your shelf…' : 'Add to Shelf'}
             </button>
           </div>
         </form>

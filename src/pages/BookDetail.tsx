@@ -49,7 +49,7 @@ const BookDetail = () => {
         {isCurrentUser && response && (
           <button
             onClick={() => navigate(`/questionnaire/${bookId}`)}
-            className="absolute -top-2 -right-2 p-2 bg-white rounded-full shadow-md hover:bg-pink-50 transition-colors"
+            className="absolute -top-2 -right-2 p-1.5 bg-pink-100 text-pink-600 hover:bg-pink-600 hover:text-white rounded-full transition-colors"
             aria-label="Edit your response"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -97,7 +97,7 @@ const BookDetail = () => {
           </div>
         </>
       ) : (
-        <p className="text-gray-500 italic">Waiting for {user}'s response 👀</p>
+        <p className="text-gray-500 italic">{user} hasn’t shared their thoughts yet 🌷</p>
       )}
     </div>
   );
@@ -152,7 +152,7 @@ const BookDetail = () => {
                       handleSave();
                     }
                   }}
-                  className="p-1.5 text-pink-500 hover:bg-pink-50 rounded-full transition-colors ml-1"
+                  className="p-1.5 bg-pink-100 text-pink-600 hover:bg-pink-600 hover:text-white rounded-full transition-colors ml-1"
                   aria-label={isEditing ? 'Save changes' : 'Edit book details'}
                 >
                   {isEditing ? (

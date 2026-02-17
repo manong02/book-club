@@ -8,6 +8,7 @@ import BookDetail from './pages/BookDetail.tsx';
 import Questionnaire from './pages/Questionnaire.tsx';
 import AddBook from './pages/AddBook.tsx';
 import Loading from './components/Loading';
+import ScrollToTop from './components/ScrollTop.tsx';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -20,12 +21,13 @@ function App() {
   }, []);
 
   return (
-    <div className="h-screen w-full overflow-y-auto bg-gradient-to-br from-pink-50 to-white">
+    <div  id="app-scroll-container" className="h-screen w-full overflow-y-auto bg-gradient-to-br from-pink-50 to-white">
       {loading ? (
         <Loading />
       ) : (
         <AppProvider>
           <Router>
+              <ScrollToTop />
             <Routes>
               <Route path="/" element={<UserSelection />} />
               <Route path="/home" element={<Home />} />
