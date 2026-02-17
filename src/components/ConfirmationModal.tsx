@@ -1,11 +1,13 @@
 import { X } from 'lucide-react';
 
+import type { ReactNode } from 'react';
+
 interface ConfirmationModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
   title: string;
-  message: string;
+  message: string | ReactNode;
   confirmText?: string;
   cancelText?: string;
 }

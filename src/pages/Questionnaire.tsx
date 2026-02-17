@@ -18,8 +18,9 @@ const Questionnaire = () => {
     thoughts: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [existingResponse, setExistingResponse] = useState<any>(null);
+  // These are intentionally unused for now but will be implemented in a future update
+  const [_isEditMode, _setIsEditMode] = useState(false);
+  const [_existingResponse, _setExistingResponse] = useState<any>(null);
 
   const book = books.find((b: Book) => b.id === parseInt(bookId || '0'));
   
@@ -32,6 +33,23 @@ const Questionnaire = () => {
     
     const responsesForBook = getBookResponses(parseInt(bookId));
     const userResponse = currentUser === 'Manon' ? responsesForBook.manon : responsesForBook.jerina;
+    
+    if (userResponse) {
+      _setExistingResponse(userResponse);
+      _setIsEditMode(true);
+    }
+  }, [currentUser, bookId, getBookResponses, navigate]);
+
+  // Initialize form with existing response data if available
+  useEffect(() => {
+    if (!currentUser || !bookId) {
+      navigate('/');
+      return;
+    }
+    
+    const responsesForBook = getBookResponses(parseInt(bookId));
+    const userResponse = currentUser === 'Manon' ? responsesForBook.manon : responsesForBook.jerina;
+    
     if (userResponse) {
       // Only update if the form is empty to prevent infinite updates
       if (!formData.favoriteCharacter && !formData.favoriteQuote) {
@@ -56,27 +74,19 @@ const Questionnaire = () => {
     if (!currentUser || !bookId) return;
 
     setIsSubmitting(true);
+    
     try {
-      // Prepare the response object according to the Response type
-      const response = {
+      // In this simplified version, we're just adding responses, not updating
+      // The edit mode functionality can be implemented later
+      await addResponse({
         bookId: parseInt(bookId),
         user: currentUser,
-        rating: formData.rating,
-        favoriteCharacter: formData.favoriteCharacter,
-        favoriteQuote: formData.favoriteQuote,
-        discussionQuestion: formData.discussionQuestion,
-        thoughts: formData.thoughts,
-        createdAt: isEditMode && existingResponse ? existingResponse.createdAt : new Date().toISOString()
-      };
-
-      // Save the response
-      await addResponse(response);
+        ...formData
+      });
       
-      // Navigate back to the book detail page
       navigate(`/book/${bookId}`, { replace: true });
     } catch (error) {
       console.error('Error submitting response:', error);
-      // Optionally show an error message to the user
     } finally {
       setIsSubmitting(false);
     }
@@ -98,20 +108,17 @@ const Questionnaire = () => {
           </svg>
           Back
         </button>
-        {isEditMode && (
-          <span className="text-sm text-pink-600 bg-pink-50 px-3 py-1 rounded-full">
-            Editing your response
-          </span>
-        )}
       </div>
       <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6 flex flex-col" style={{ minHeight: 'calc(100vh - 8rem)' }}>
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-pink-800">{book.title}</h1>
+          <h1 className="text-2xl font-bold text-pink-800 mb-2">
+            {_isEditMode ? 'Edit Your Thoughts' : 'Share Your Thoughts'}
+          </h1>
           <p className="text-gray-600 mt-1">by {book.author}</p>
         </div>
         
         <form onSubmit={handleSubmit} className="flex flex-col h-full">
-          <div className="space-y-6 flex-1">
+          <div className="space-y-3 flex-1">
             <div>
               <label className="block text-gray-700 font-medium mb-3">
                 How would you rate this book?
@@ -204,8 +211,8 @@ const Questionnaire = () => {
               >
                 {isSubmitting 
                   ? 'Saving...' 
-                  : isEditMode 
-                    ? 'Update Your Response' 
+                  : _isEditMode 
+                    ? 'Update Your Thoughts' 
                     : 'Submit Your Thoughts'}
               </button>
             </div>

@@ -25,7 +25,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   
   const [books, setBooks] = useState<Book[]>(() => {
     const savedBooks = localStorage.getItem('bookClubBooks');
-    return savedBooks ? JSON.parse(savedBooks) : initialBooks;
+    return savedBooks ? JSON.parse(savedBooks) : [];
   });
   
   const [responses, setResponses] = useState<Response[]>(() => {

@@ -214,9 +214,7 @@ className="whitespace-nowrap bg-purple-400 hover:bg-purple-500 text-white font-m
           <h2 className="text-2xl font-semibold text-pink-800 mb-4">Previous Books</h2>
           {previousBooks.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {previousBooks.map((book: Book) => {
-                const responses = getBookResponses(book.id);
-                return (
+              {previousBooks.map((book: Book) => (
                   <div 
                     key={book.id} 
                     onClick={() => navigate(`/book/${book.id}`)}
@@ -243,8 +241,8 @@ className="whitespace-nowrap bg-purple-400 hover:bg-purple-500 text-white font-m
                       </div>
                     </div>
                   </div>
-                );
-              })}
+                )
+              )}
             </div>
           ) : (
             <p className="text-gray-500 italic">No previous books yet. Start reading!</p>
