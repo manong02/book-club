@@ -1,0 +1,21 @@
+{
+  "name": "Cozy Chapters",
+  "short_name": "CozyChapters",
+  "description": "A cozy book club app to track your reading journey",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#db2777",
+  "icons": [
+    {
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

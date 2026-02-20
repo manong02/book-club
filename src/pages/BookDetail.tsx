@@ -88,7 +88,17 @@ const BookDetail = () => {
           
           <div>
             <h4 className="font-medium text-gray-700">Discussion Question</h4>
-            <p className="text-gray-800">{response.discussionQuestion}</p>
+            <div className="text-gray-800 space-y-1">
+              {Array.isArray((response as any).discussionQuestions) ? (
+                (response as any).discussionQuestions
+                  .filter((q: unknown) => typeof q === 'string' && q.trim().length > 0)
+                  .map((q: string, idx: number) => (
+                    <p key={idx}>{q}</p>
+                  ))
+              ) : (
+                <p>{(response as any).discussionQuestion}</p>
+              )}
+            </div>
           </div>
           
           <div>
@@ -104,12 +114,12 @@ const BookDetail = () => {
 };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-white p-6">
+    <div className="w-full p-6">
       <div className="max-w-5xl mx-auto">
         <div className="mb-6">
           <button 
             onClick={() => navigate(-1)}
-            className="inline-flex items-center text-sm font-medium p-2 rounded bg-pink-100 text-pink-700 hover:bg-pink-200 transition-colors mb-4"
+            className="inline-flex items-center text-sm font-medium p-2 rounded-lg bg-pink-100 text-pink-700 hover:bg-pink-200 transition-colors mb-4"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />

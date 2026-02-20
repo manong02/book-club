@@ -21,7 +21,7 @@ export interface Response {
   rating: number;
   favoriteCharacter: string;
   favoriteQuote: string;
-  discussionQuestion: string;
+  discussionQuestions: string[];
   thoughts: string;
   createdAt: string;
 }

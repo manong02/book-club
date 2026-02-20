@@ -21,21 +21,26 @@ function App() {
   }, []);
 
   return (
-    <div  id="app-scroll-container" className="h-screen w-full overflow-y-auto bg-gradient-to-br from-pink-50 to-white">
+    <div
+      id="app-scroll-container"
+      className="h-dvh w-full overflow-y-auto overflow-x-hidden bg-gradient-to-br from-pink-50 to-white pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]"
+    >
       {loading ? (
         <Loading />
       ) : (
         <AppProvider>
           <Router>
+            <div className="min-h-dvh">
               <ScrollToTop />
-            <Routes>
-              <Route path="/" element={<UserSelection />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/book/:bookId" element={<BookDetail />} />
-              <Route path="/questionnaire/:bookId" element={<Questionnaire />} />
-              <Route path="/add-book" element={<AddBook />} />
-              <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
+              <Routes>
+                <Route path="/" element={<UserSelection />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/book/:bookId" element={<BookDetail />} />
+                <Route path="/questionnaire/:bookId" element={<Questionnaire />} />
+                <Route path="/add-book" element={<AddBook />} />
+                <Route path="*" element={<Navigate to="/" />} />
+              </Routes>
+            </div>
           </Router>
         </AppProvider>
       )}
