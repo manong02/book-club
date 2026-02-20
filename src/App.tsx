@@ -9,6 +9,7 @@ import Questionnaire from './pages/Questionnaire.tsx';
 import AddBook from './pages/AddBook.tsx';
 import Loading from './components/Loading';
 import ScrollToTop from './components/ScrollTop.tsx';
+import FullscreenSidebarMenu from './components/FullscreenSidebarMenu.tsx';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -32,6 +33,11 @@ function App() {
           <Router>
             <div className="min-h-dvh">
               <ScrollToTop />
+              <div className="fixed left-4 top-[calc(env(safe-area-inset-top)+1.5rem)] z-50">
+                <FullscreenSidebarMenu
+                  showOnRoutes={['/home', '/waiting-list', '/previous-reads']}
+                />
+              </div>
               <Routes>
                 <Route path="/" element={<UserSelection />} />
                 <Route path="/home" element={<Home />} />
